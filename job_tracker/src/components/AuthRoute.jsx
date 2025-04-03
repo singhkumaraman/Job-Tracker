@@ -12,7 +12,6 @@ const AuthRoute = ({ children }) => {
 
   if (loading) {
     return <div>Loading...</div>;
-    I;
   }
 
   return token ? children : <Navigate to="/login" replace />;

@@ -33,14 +33,18 @@ const Jobcard = ({
             <span className="fw-bold">{location}</span>
           </div>
         </div>
-        { (status!=='Withdrawn')?<div className="d-flex gap-2">
-          <button
-            className="btn btn-link text-primary p-0 text-decoration-none"
-            onClick={() => withdrawJob(jobId)} 
-          >
-            Withdraw
-          </button>
-        </div>:<></>}
+        {status !== "Withdrawn" ? (
+          <div className="d-flex gap-2">
+            <button
+              className="btn btn-link text-primary p-0 text-decoration-none"
+              onClick={() => withdrawJob(jobId)}
+            >
+              Withdraw
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

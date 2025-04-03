@@ -3,32 +3,34 @@ import { BsFillPersonPlusFill } from "react-icons/bs";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-
-
+import { ToastContainer, toast } from "react-toastify";
 const Signup = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const success = (prop) => toast({ prop });
+  const failure = (prop) => toast({ prop });
   const signup = async (username, password, email) => {
     try {
-      const response = await axios.post("http://localhost:5272/api/auth/signup", {
+      const response = await axios.post("http://localhost:8080/auth/signup", {
         username,
         email,
         password,
       });
-      if(response.status===200){
-        alert("user created successfully");
+      if (response.status === 200) {
+        success("user registered successfull");
         navigate("/signin");
       }
     } catch (error) {
+      failure("something went wrong");
       console.error(error.response ? error.response.data : error.message);
     }
   };
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      signup(username, password, email);
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup(username, password, email);
+  };
 
   return (
     <>
