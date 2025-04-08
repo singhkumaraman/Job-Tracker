@@ -12,7 +12,11 @@ const HeroSection = () => {
           all striving to delight our customers and make their lives easier, one
           innovative product.
         </p>
-        <a href="#" className="btn btn-outline-light mt-3">
+        <a
+          href="https://en.wikipedia.org/wiki/Carrier_generation_and_recombination"
+          target="_blank"
+          className="btn btn-outline-light mt-3"
+        >
           Learn about working at Capstone.
         </a>
       </div>

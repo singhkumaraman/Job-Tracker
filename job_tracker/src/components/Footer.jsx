@@ -29,7 +29,7 @@ const Footer = () => {
               </li>
               <li className="mx-3">
                 <a
-                  href="https://github.com/Abhishek074"
+                  href="https://github.com/singhkumaraman/Job-Tracker"
                   className="text-decoration-none text-dark"
                   target="_blank"
                 >

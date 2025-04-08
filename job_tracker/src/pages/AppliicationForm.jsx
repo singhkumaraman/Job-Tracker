@@ -4,47 +4,32 @@ import { JobContext } from "../store/JobContext";
 
 const ApplicationForm = () => {
   const { currJobId, allJobs, applyJob } = useContext(JobContext);
-
-  const selectedJob = allJobs.find((job) => job.jobId === currJobId);
-
+  const selectedJob = allJobs.find((job) => job.id === currJobId);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
-    resume: null,
-    coverLetter: "",
+    resume: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  // Handle file upload
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, resume: e.target.files[0] });
-  };
-
-  // Submit handler
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault();
 
     if (!currJobId) {
       alert("No job selected. Please go back and choose a job.");
       return;
     }
 
-    // Collect application data
-    // const applicationData = {
-    //   jobId: currJobId,
-    //   fullName: formData.fullName,
-    //   email: formData.email,
-    //   phone: formData.phone,
-    //   resume: formData.resume,
-    //   coverLetter: formData.coverLetter,
-    // };
-
-    applyJob(); // Call function with complete data
+    const { phone, resume } = formData;
+    applyJob({ phone, resume });
   };
 
   return (
@@ -55,28 +40,30 @@ const ApplicationForm = () => {
             Job Application Form
           </h2>
           <p className="text-muted fs-5">
-            Please fill out the form below to apply for a job. Ensure all details are accurate.
+            Please fill out the form below to apply for a job. Ensure all
+            details are accurate.
           </p>
         </div>
 
-        {/* Display Job Details */}
         {selectedJob ? (
           <div className="row justify-content-center mb-4">
             <div className="col-md-8">
               <div className="card shadow-sm p-4 bg-white">
-                <h5 className="fw-bold">{selectedJob.position}</h5>
+                <h5 className="fw-bold">{selectedJob.position_title}</h5>
                 <p className="text-muted mb-1">
-                  <strong>Company:</strong> {selectedJob.company}
+                  <strong>Company:</strong> {selectedJob.company_name}
                 </p>
                 <p className="text-muted mb-1">
-                  <strong>Location:</strong> {selectedJob.location}
+                  <strong>Location:</strong> {selectedJob.job_location}
                 </p>
                 <p className="text-muted mb-1">
-                  <strong>Experience Required:</strong> {selectedJob.yearOfExperience}
+                  <strong>Employement Type:</strong>{" "}
+                  {selectedJob.employment_type}
                 </p>
                 <p className="text-muted">
-                  <strong>Job ID:</strong> {selectedJob.jobId} | <strong>Posted:</strong>{" "}
-                  {new Date(selectedJob.timestamp).toLocaleDateString("en-US", {
+                  <strong>Job ID:</strong> {selectedJob.jobId} |{" "}
+                  <strong>Posted:</strong>{" "}
+                  {new Date(selectedJob.posted_at).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",
                     day: "numeric",
@@ -86,7 +73,9 @@ const ApplicationForm = () => {
             </div>
           </div>
         ) : (
-          <p className="text-center text-danger">No job selected. Please choose a job before applying.</p>
+          <p className="text-center text-danger">
+            No job selected. Please choose a job before applying.
+          </p>
         )}
 
         <div className="row justify-content-center">
@@ -142,21 +131,23 @@ const ApplicationForm = () => {
 
               <div className="mb-3">
                 <label htmlFor="resume" className="form-label fw-semibold">
-                  Upload Resume (PDF/DOC)
+                  Resume Link
                 </label>
                 <input
-                  type="file"
+                  type="text"
                   id="resume"
                   name="resume"
                   className="form-control"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
+                  onChange={handleChange}
                   required
                 />
               </div>
 
               <div className="text-center">
-                <button onClick={handleSubmit} className="btn btn-primary px-4 py-2 fw-semibold">
+                <button
+                  onClick={handleSubmit}
+                  className="btn btn-primary px-4 py-2 fw-semibold"
+                >
                   Submit Application
                 </button>
               </div>

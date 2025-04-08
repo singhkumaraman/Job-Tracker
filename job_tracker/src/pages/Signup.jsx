@@ -4,32 +4,39 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+
 const Signup = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const success = (prop) => toast({ prop });
-  const failure = (prop) => toast({ prop });
-  const signup = async (username, password, email) => {
+
+  const success = (prop) => toast(prop);
+  const failure = (prop) => toast(prop);
+
+  const signup = async (name, password, username) => {
     try {
-      const response = await axios.post("http://localhost:8080/auth/signup", {
-        username,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:8080/job-tracker/auth/signup",
+        {
+          name,
+          username,
+          password,
+        }
+      );
       if (response.status === 200) {
-        success("user registered successfull");
+        success("User registered successfully");
         navigate("/signin");
       }
     } catch (error) {
-      failure("something went wrong");
+      failure("Something went wrong");
       console.error(error.response ? error.response.data : error.message);
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    signup(username, password, email);
+    signup(name, password, username);
   };
 
   return (
@@ -46,19 +53,19 @@ const Signup = () => {
                 type="text"
                 className="form-control"
                 placeholder="Enter your name"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Email address</label>
+              <label className="form-label">Email</label>
               <input
-                type="email"
+                type="text"
                 className="form-control"
-                placeholder="name@company.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Create a username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
             </div>
@@ -85,6 +92,7 @@ const Signup = () => {
           </form>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 };
