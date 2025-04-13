@@ -76,7 +76,7 @@ const ApplicationForm = () => {
           </div>
         ) : (
           <p className="text-center text-danger mb-4">
-            No job selected. Please choose a job before applying.
+            No job selected.Please choose a job before applying.
           </p>
         )}
 
