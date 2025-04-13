@@ -26,16 +26,19 @@ const JobList = ({
     : "No Deadline";
 
   const { setCurrJobId } = useContext(JobContext);
+
   return (
-    <div className="card shadow-sm mb-3">
-      <div className="card-body d-flex justify-content-between align-items-start">
+    <div className="card shadow-lg mb-4 border-light rounded-3">
+      <div className="card-body d-flex justify-content-between align-items-start p-4">
         <div>
-          <h6 className="fw-bold">{position}</h6>
-          <a href="#" className="text-primary text-decoration-none">
+          <h5 className="fw-bold text-dark">{position}</h5>
+          <a href="#" className="text-primary text-decoration-none fw-semibold">
             {company}
           </a>
-          <p className="text-muted mb-1">
-            Job ID: {jobId} | Posted: {formattedPostedDate}
+          <p className="text-muted mb-2">
+            <small>
+              Job ID: {jobId} | Posted: {formattedPostedDate}
+            </small>
           </p>
           <p className="mb-1">
             <strong>Location: </strong> {location}
@@ -44,13 +47,14 @@ const JobList = ({
             <strong>Deadline: </strong> {formattedDeadline}
           </p>
         </div>
-        <div>
+        <div className="d-flex align-items-center">
           <Link
-            className="btn btn-outline-primary btn-sm"
+            className="btn btn-primary btn-sm fw-semibold text-white"
             to="/apply"
             onClick={() => setCurrJobId(jobId)}
+            style={{ padding: "8px 16px" }}
           >
-            Apply
+            Apply Now
           </Link>
         </div>
       </div>

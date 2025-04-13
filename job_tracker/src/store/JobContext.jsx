@@ -85,7 +85,7 @@ export const JobProvider = ({ children }) => {
   const withdrawJob = async (jobId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8080/job-tracker/job//withdraw//${jobId}`,
+        `http://localhost:8080/job-tracker/job/withdraw/${jobId}`,
         {},
         {
           headers: {

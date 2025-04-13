@@ -5,22 +5,34 @@ import { JobContext } from "../store/JobContext";
 
 const Applications = () => {
   const { appliedJobs, allJobs } = useContext(JobContext);
+
   const applications = appliedJobs
     .map((appliedJob) => {
       const matchedJob = allJobs.find((job) => job.id === appliedJob.jobId);
       if (matchedJob) {
-        const date = new Date(appliedJob.applicationDate);
-        const formattedDate = date.toLocaleDateString("en-GB", {
+        const applicationDate = new Date(appliedJob.applicationDate);
+        const formattedDate = applicationDate.toLocaleDateString("en-GB", {
           day: "2-digit",
           month: "short",
           year: "numeric",
         });
+
+        let formattedClosingDate = "";
+        if (appliedJob.closingDate) {
+          const closingDate = new Date(appliedJob.closingDate);
+          formattedClosingDate = closingDate.toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          });
+        }
 
         return {
           ...appliedJob,
           ...matchedJob,
           jobDetails: matchedJob,
           formattedDate,
+          formattedClosingDate,
         };
       }
       return null;
@@ -41,6 +53,7 @@ const Applications = () => {
             company={app.jobDetails.company_name}
             jobId={app.id}
             appliedDate={app.formattedDate}
+            withDrawnDate={app.formattedClosingDate}
             location={app.jobDetails.job_location}
           />
         ))

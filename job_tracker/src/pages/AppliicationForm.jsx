@@ -36,20 +36,22 @@ const ApplicationForm = () => {
     <section className="bg-light py-5">
       <div className="container">
         <div className="text-center mb-4">
-          <h2 className="fw-bold display-5 text-secondary">
+          <h2 className="fw-bold display-4 text-secondary">
             Job Application Form
           </h2>
           <p className="text-muted fs-5">
-            Please fill out the form below to apply for a job. Ensure all
-            details are accurate.
+            Please complete the form below to apply for your selected job.
+            Ensure all details are accurate to enhance your chances.
           </p>
         </div>
 
         {selectedJob ? (
-          <div className="row justify-content-center mb-4">
+          <div className="row justify-content-center mb-5">
             <div className="col-md-8">
-              <div className="card shadow-sm p-4 bg-white">
-                <h5 className="fw-bold">{selectedJob.position_title}</h5>
+              <div className="card shadow-lg p-4 bg-white rounded-3">
+                <h5 className="fw-bold text-dark">
+                  {selectedJob.position_title}
+                </h5>
                 <p className="text-muted mb-1">
                   <strong>Company:</strong> {selectedJob.company_name}
                 </p>
@@ -57,7 +59,7 @@ const ApplicationForm = () => {
                   <strong>Location:</strong> {selectedJob.job_location}
                 </p>
                 <p className="text-muted mb-1">
-                  <strong>Employement Type:</strong>{" "}
+                  <strong>Employment Type:</strong>{" "}
                   {selectedJob.employment_type}
                 </p>
                 <p className="text-muted">
@@ -73,17 +75,17 @@ const ApplicationForm = () => {
             </div>
           </div>
         ) : (
-          <p className="text-center text-danger">
+          <p className="text-center text-danger mb-4">
             No job selected. Please choose a job before applying.
           </p>
         )}
 
         <div className="row justify-content-center">
           <div className="col-md-8">
-            <form>
-              <div className="mb-3">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
                 <label htmlFor="fullName" className="form-label fw-semibold">
-                  Full Name
+                  Full Name <span className="text-danger">*</span>
                 </label>
                 <input
                   type="text"
@@ -97,25 +99,25 @@ const ApplicationForm = () => {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-4">
                 <label htmlFor="email" className="form-label fw-semibold">
-                  Email Address
+                  Email Address <span className="text-danger">*</span>
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   className="form-control"
-                  placeholder="yourname@example.com"
+                  placeholder="youremail@example.com"
                   value={formData.email}
                   onChange={handleChange}
                   required
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-4">
                 <label htmlFor="phone" className="form-label fw-semibold">
-                  Phone Number
+                  Phone Number <span className="text-danger">*</span>
                 </label>
                 <input
                   type="tel"
@@ -129,24 +131,30 @@ const ApplicationForm = () => {
                 />
               </div>
 
-              <div className="mb-3">
+              <div className="mb-4">
                 <label htmlFor="resume" className="form-label fw-semibold">
-                  Resume Link
+                  Resume Link <span className="text-danger">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="url"
                   id="resume"
                   name="resume"
                   className="form-control"
+                  placeholder="Enter your resume URL"
+                  value={formData.resume}
                   onChange={handleChange}
                   required
                 />
+                <div className="form-text text-muted mt-1">
+                  Please provide a link to your resume hosted on a cloud
+                  platform (e.g., Google Drive, Dropbox).
+                </div>
               </div>
 
-              <div className="text-center">
+              <div className="text-center mt-4">
                 <button
-                  onClick={handleSubmit}
-                  className="btn btn-primary px-4 py-2 fw-semibold"
+                  type="submit"
+                  className="btn btn-primary px-5 py-3 fw-semibold text-white"
                 >
                   Submit Application
                 </button>

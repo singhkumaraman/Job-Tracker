@@ -18,14 +18,14 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-light shadow-sm">
-      <nav className="navbar navbar-expand-lg navbar-light container py-3">
+    <header className="bg-light py-3">
+      <nav className="navbar navbar-expand-lg navbar-light container">
         <Link
-          className="navbar-brand d-flex align-items-center text-dark text-decoration-none brand-hover"
+          className="navbar-brand d-flex align-items-center text-dark text-decoration-none"
           to="/"
         >
-          <SiAnalogue className="me-2 text-primary fs-4" />
-          <span className="fw-bold fs-5">Job Application Tracker</span>
+          <SiAnalogue className="me-2 text-info fs-4" />
+          <span className="fw-bold fs-4">Job Application Tracker</span>
         </Link>
 
         {/* Navbar Toggle Button (for Mobile) */}
@@ -46,23 +46,23 @@ const Header = () => {
           id="navbarNav"
         >
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item mx-2">
-              <Link to="/" className="nav-link text-dark fw-semibold nav-hover">
+            <li className="nav-item mx-3">
+              <Link to="/" className="nav-link text-dark fw-medium nav-hover">
                 Home
               </Link>
             </li>
-            <li className="nav-item mx-2">
+            <li className="nav-item mx-3">
               <Link
                 to="/applications"
-                className="nav-link text-dark fw-semibold nav-hover"
+                className="nav-link text-dark fw-medium nav-hover"
               >
                 Applications
               </Link>
             </li>
-            <li className="nav-item mx-2">
+            <li className="nav-item mx-3">
               <Link
                 to="/jobs"
-                className="nav-link text-dark fw-semibold nav-hover"
+                className="nav-link text-dark fw-medium nav-hover"
               >
                 Jobs
               </Link>
@@ -73,14 +73,14 @@ const Header = () => {
             {isAuthenticated ? (
               <button
                 onClick={logout}
-                className="btn btn-outline-danger fw-semibold px-4 auth-hover"
+                className="btn btn-outline-secondary px-4 py-2 rounded-pill auth-hover"
               >
                 Sign Out
               </button>
             ) : (
               <Link
                 to="/signin"
-                className="btn btn-primary fw-semibold px-4 auth-hover"
+                className="btn btn-info px-4 py-2 rounded-pill auth-hover"
               >
                 Sign In
               </Link>
@@ -91,26 +91,36 @@ const Header = () => {
 
       <style>
         {`
-          .brand-hover:hover {
-            color: #007bff !important;
-            transition: color 0.3s ease-in-out;
+          .navbar-brand:hover {
+            color: #17a2b8;
+            transition: color 0.3s ease;
           }
           .nav-hover {
             transition: color 0.3s ease-in-out;
           }
           .nav-hover:hover {
-            color: #007bff !important;
+            color: #17a2b8 !important;
           }
           .auth-hover {
             transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
           }
           .auth-hover:hover {
-            background-color: #0056b3 !important;
-            color: #fff !important;
-          }
-          .btn-outline-danger.auth-hover:hover {
-            background-color: #dc3545 !important;
+            background-color: #17a2b8 !important;
             color: white !important;
+          }
+          .btn-outline-secondary.auth-hover:hover {
+            background-color: #6c757d !important;
+            color: white !important;
+          }
+          .navbar-toggler-icon {
+            background-color: #17a2b8;
+          }
+          .navbar-nav .nav-item .nav-link {
+            font-size: 1.2rem;
+            font-weight: 500;
+          }
+          .navbar-nav .nav-item .nav-link:hover {
+            color: #17a2b8;
           }
         `}
       </style>
