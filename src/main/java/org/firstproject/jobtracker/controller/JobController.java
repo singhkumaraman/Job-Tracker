@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("job-tracker/job")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins ="http://localhost:5173")
 public class JobController {
     private Jobs jobs;
     private final JobRepository jobRepository;

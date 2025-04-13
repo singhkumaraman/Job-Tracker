@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -74,6 +76,7 @@ public class UserService {
         JobApplication jobApplication = jobApplicationRepo.findByJobId(id);
         if (jobApplication != null) {
             jobApplication.setStatus("withdrawn");
+            jobApplication.setClosingDate(new Date());
             jobApplicationRepo.save(jobApplication);
         } else {
             throw new EntityNotFoundException("JobApplication not found for job ID: " + id);
